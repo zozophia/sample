@@ -19,6 +19,11 @@ spec:
         image: registry.gitlab.com/k8slove/3layer-test/sample-nginx:latest 
         ports:
         - containerPort: 80
+        command: ["/bin/bash"]
+        args: 
+        - "-c"
+        - "service nginx start \
+           && while true; do echo hello; sleep 10;done"
       imagePullSecrets:
         - name: gitlab-secret
 

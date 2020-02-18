@@ -8,6 +8,10 @@ RUN cp 3layer-test/sample/sample.html /usr/share/nginx/html/index.html
 
 CMD ["service","nginx","start"]#this line doesn't work:(
 CMD ["bash"]
+<<<<<<< HEAD
+=======
+CMD ["service" "nginx" "start"]#CMD doesn't work in k8s
+>>>>>>> e1bedea4e04acf6cce8d0aa5154fca9c266d1e70
 
 #sudo docker login registry.gitlab.com 
 #sudo docker tag <tag> registry.gitlab.com/k8slove/3layer-test/<container name>
