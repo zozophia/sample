@@ -1,34 +1,12 @@
-# Getting Base Image
-FROM centos:6
-# start install nginx
-RUN yum update -y
-RUN yum install -y vim
-RUN yum install -y curl
-RUN yum install -y epel-release
-RUN yum install -y sendmail
-RUN yum install -y cronie-noanacron
-RUN yum install -y ntp
-RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
-RUN yum install -y nginx
-RUN /etc/init.d/nginx start
-RUN chkconfig nginx on
-# start install mysql
-RUN yum -y install mysql-server
-RUN /etc/init.d/mysqld start
-RUN chkconfig mysqld on
-# start install php
-RUN yum -y install php
-RUN yum -y install php-mysql
-# start install ssh
-RUN yum install -y openssh-server
-RUN yum install -y openssh-clients
-RUN sed -ri 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config
-RUN mkdir ~/.ssh
-RUN chmod 700 ~/.ssh
-RUN touch ~/.ssh/authorized_keys
-RUN chmod 600 ~/.ssh/authorized_keys
-# Port
-EXPOSE 22 80 8080 3306
-# echo running
-CMD ["echo", "running!"]
+FROM ubuntu:latest
+MAINTAINER masaru
+RUN apt-get update -y
+RUN apt-get install -y nginx curl
+EXPOSE 80
+CMD ["bash"]
+CMD ["service" "nginx" "start"]
+
+#sudo docker login registry.gitlab.com 
+#sudo docker tag <tag> registry.gitlab.com/k8slove/3layer-test/<container name>
+#sudo docker push registry.gitlab.com/k8slove/3layer-test/<container name>
 
